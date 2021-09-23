@@ -42,7 +42,7 @@ function setup() {
 	ground = new Ground(width/2,600,width,20);
 
   //create launcher with stone as bodyA
-  launcher = new Launcher(mango1.body,{x:235,y:420});
+  launcher = new Launcher(stone.body,{x:235,y:420});
 
 	Engine.run(engine);
 }
@@ -53,8 +53,9 @@ function draw() {
   Engine.update(engine);
   textSize(25);
   text("Hit the mangoes with the stone!!",50 ,50);
-  image(boy ,200,340,200,300);
-  
+  image(boy ,200,360,200,300);
+  imageMode(CENTER)
+  image(tree,1000,300,500,600)
 
   
   stone.display();
@@ -94,7 +95,7 @@ function draw() {
 function mouseDragged()
 {
   // Set position of stone when mouse is dragged
-	Matter.Body.setPosition(mango1.body, {x:mouseX, y:mouseY});
+	Matter.Body.setPosition(stone.body, {x:mouseX, y:mouseY});
 }
 
 function mouseReleased()
@@ -115,4 +116,11 @@ function detectollision(lstone,lmango){
   	  Matter.Body.setStatic(lmango.body,false);
     }
 
+  }
+
+  function keyPressed(){
+    if (keyCode === 32){
+      Matter.Body.setPosition(stone.body,{x:235,y:420})
+      launcher.attach(stone.body);
+    }
   }
